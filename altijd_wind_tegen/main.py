@@ -20,7 +20,6 @@ async def main(test_file_location: str):
     closest_site = get_closest_weather_site(track_segment.get_centroid, office_client.location_id_by_location)
 
     wind_predictions: list[DailyWindPrediction] = await office_client.get_wind_predictions_for_location(closest_site)
-
     broad_direction_percentage = get_broad_direction_percentace(
         wind_predictions[0].wind_direction, bearing_by_percentage_of_segment
     )

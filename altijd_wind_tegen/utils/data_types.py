@@ -1,4 +1,5 @@
 from collections import defaultdict
+from enum import Enum
 from dataclasses import dataclass, field
 from typing import Literal
 
@@ -8,15 +9,50 @@ from shapely import LineString, Point
 target_epsg = "epsg:27700"  # TODO this should be configurable, by fetching the gpx location.
 source_epsg = "epsg:4326"
 
-CardinalDirection = Literal[
-    "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"
-]
+class CardinalDirection(Enum):
+    N = "N"
+    NNE = "NNE"
+    NE = "NE"
+    ENE = "ENE"
+    E = "E"
+    ESE = "ESE"
+    SE = "SE"
+    SSE = "SSE"
+    S = "S"
+    SSW = "SSW"
+    SW = "SW"
+    WSW = "WSW"
+    W = "W"
+    WNW = "WNW"
+    NW = "NW"
+    NNW = "NNW"
+
+
+normalised_cardinal_direction_map = {
+    0: CardinalDirection.N,
+    1: CardinalDirection.NNE,
+    2: CardinalDirection.NE,
+    3: CardinalDirection.ENE,
+    4: CardinalDirection.E,
+    5: CardinalDirection.ESE,
+    6: CardinalDirection.SE,
+    7: CardinalDirection.SSE,
+    8: CardinalDirection.S,
+    9: CardinalDirection.SSW,
+    10: CardinalDirection.SW,
+    11: CardinalDirection.WSW,
+    12: CardinalDirection.W,
+    13: CardinalDirection.WNW,
+    14: CardinalDirection.NW,
+    15: CardinalDirection.NNW,
+}
+
 
 
 @dataclass
 class DailyWindPrediction(DataClassJsonMixin):
     # There are many values. We just want the wind related
-    wind_direction: str = field(metadata=config(field_name="D"))
+    wind_direction: CardinalDirection = field(metadata=config(field_name="D"))
     wind_speed: str = field(metadata=config(field_name="S"))
     wind_gust_noon: str | None = field(default=None, metadata=config(field_name="Gn"))
     wind_gust_midnight: str | None = field(default=None, metadata=config(field_name="Gm"))
