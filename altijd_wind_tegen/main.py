@@ -15,7 +15,7 @@ async def main(test_file_location: str):
     calculate_track_segment_bearings(track_segment)
     bearing_by_percentage_of_segment = track_segment.bearing_by_percentage_of_length
 
-    office_client = WeatherOffice(api_key=api_key, base_url=base_url)
+    office_client = WeatherOffice(api_key=api_key)
     await office_client.get_site_locations()
     closest_site = get_closest_weather_site(track_segment.get_centroid, office_client.location_id_by_location)
 
