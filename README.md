@@ -9,6 +9,22 @@ Inspired by the heroes of [NK Tegenwindfietsen](https://en.wikipedia.org/wiki/Du
 ![NK Tegenwindfietsen](altijd_wind_tegen/_static/tegenwindfietsen.png)
 
 
+```
+pipenv install
+pipenv shell
+python -m altijd_wind_tegen.main
+
+The main wind direction tomorrow will be SSW at 11 mph
+Your ride (None) will be facing this direction 20.239999999999966 % of the time
+The main wind direction tomorrow will be SSW at 11 mph
+Your ride (None) will be facing this direction 16.37999999999999 % of the time
+The main wind direction tomorrow will be SSW at 11 mph
+Your ride (None) will be facing this direction 23.25 % of the time
+The main wind direction tomorrow will be SSW at 11 mph
+Your ride (None) will be facing this direction 10.879999999999995 % of the time
+```
+
+
 ## TODO
 
 - Get the name from the GPX file.
