@@ -12,22 +12,15 @@ Inspired by the heroes of [NK Tegenwindfietsen](https://en.wikipedia.org/wiki/Du
 ```
 pipenv install
 pipenv shell
-python -m altijd_wind_tegen.main
+python -m main --file-location location/of/your/file.gpx
 
 The main wind direction tomorrow will be SSW at 11 mph
-Your ride (None) will be facing this direction 20.239999999999966 % of the time
-The main wind direction tomorrow will be SSW at 11 mph
-Your ride (None) will be facing this direction 16.37999999999999 % of the time
-The main wind direction tomorrow will be SSW at 11 mph
-Your ride (None) will be facing this direction 23.25 % of the time
-The main wind direction tomorrow will be SSW at 11 mph
-Your ride (None) will be facing this direction 10.879999999999995 % of the time
+Your ride Riding Through the North will be facing this direction 20.24 % of the time
 ```
 
 
 ## TODO
 
-- Get the name from the GPX file.
 - Add more Weather Offices (currently UK (MetOffice)-only). / geospatial validation.
 - Add more flexibility to decide the time of the ride (currently defaults to tomorrow morning).
 - Add some actual tests.

@@ -1,5 +1,4 @@
 # TODO I should subdivide this by country. Currently only works for the UK.
-import json
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from typing import Literal
@@ -13,7 +12,7 @@ from .data_types import DailyWindPrediction
 @dataclass
 class WeatherOffice:
     api_key: str
-    base_url: str =  "http://datapoint.metoffice.gov.uk/public/data"
+    base_url: str = "http://datapoint.metoffice.gov.uk/public/data"
     data_format: Literal["json", "xml"] = "json"
     locations_by_location_id: dict[int, Point] = field(init=False)
     location_id_by_location: dict[Point, int] = field(init=False)

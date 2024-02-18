@@ -9,8 +9,10 @@ def get_closest_weather_site(segment_centroid: Point, location_id_by_location: d
     tree = STRtree(list(location_id_by_location.keys()))
     return location_id_by_location[tree.geometries.take(tree.nearest(segment_centroid))]
 
+
 def bearing_to_16_point_compass(bearing: float) -> str:
     return normalised_cardinal_direction_map[int(((bearing + 11.25) % 360) / 22.5)]
+
 
 def calculate_track_segment_bearings(track_segment: TrackSegment):
     total_length = 0

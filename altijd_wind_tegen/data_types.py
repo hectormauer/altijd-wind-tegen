@@ -1,6 +1,6 @@
 from collections import defaultdict
-from enum import Enum
 from dataclasses import dataclass, field
+from enum import Enum
 from typing import Literal
 
 from dataclasses_json import DataClassJsonMixin, config
@@ -8,6 +8,7 @@ from shapely import LineString, Point
 
 target_epsg = "epsg:27700"  # TODO this should be configurable, by fetching the gpx location.
 source_epsg = "epsg:4326"
+
 
 class CardinalDirection(Enum):
     N = "N"
@@ -46,7 +47,6 @@ normalised_cardinal_direction_map = {
     14: CardinalDirection.NW,
     15: CardinalDirection.NNW,
 }
-
 
 
 @dataclass

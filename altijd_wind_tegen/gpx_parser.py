@@ -86,9 +86,7 @@ def parse_track_segment(track_segment: Element) -> TrackSegment | None:
     return TrackSegment(list_of_segments)
 
 
-def parse_track(track: Element) -> Track:
-    # FIXME can't find the name
-    name = get_text(track, "name")
+def parse_track(name: str, track: Element) -> Track:
     list_of_track_segments = []
     segments = track.findall("topo:trkseg", GPX_NAMESPACE)
     for segment in segments:
@@ -96,16 +94,43 @@ def parse_track(track: Element) -> Track:
     return Track(name, list_of_track_segments)
 
 
+# def parse_metadata(self, metadata, tag: str = "metadata") -> Metadata | None:
+#     """
+#     Parse metadataType element from GPX file.
+
+#     Args:
+#         metadata (xml.etree.ElementTree.Element): Parsed metadata element.
+#         tag (str, Optional): XML tag. Defaults to "metadata".
+
+#     Returns:
+#         Metadata: Metadata instance.
+#     """
+#     if metadata is None:
+#         return None
+
+#     name = self.find_text(metadata, "topo:name")
+#     desc = self.find_text(metadata, "topo:desc")
+#     author = self.parse_person(metadata.find("topo:author", self.name_space))
+#     copyright = self.parse_copyright(metadata.find("topo:copyright", self.name_space))
+#     link = self.parse_link(metadata.find("topo:link", self.name_space))
+#     time = self.find_time(metadata, "topo:time")
+#     keywords = self.find_text(metadata, "topo:keywords")
+#     bounds = self.parse_bounds(metadata.find("topo:bounds", self.name_space))
+#     extensions = self.parse_extensions(metadata.find("topo:extensions", self.name_space))
+
+#     return Metadata(tag, name, desc, author, copyright, link, time, keywords, bounds, extensions)
+
+
 def parse(file_path: str) -> list[Track]:
     tracks_list = []
     xml_tree = ET.parse(file_path)
     xml_root = xml_tree.getroot()
+
+    metadata = xml_root.find("topo:metadata", GPX_NAMESPACE)
+    name = find_text(metadata, "topo:name")
+
     tracks = xml_root.findall("topo:trk", GPX_NAMESPACE)
     for track in tracks:
-        tracks_list.append(parse_track(track))
+        tracks_list.append(parse_track(name, track))
+
     return tracks_list
-
-
-if __name__ == "__main__":
-    # parse("test-files/alcester_proper.gpx")
-    parse("test-files/malvern-mad-hare.gpx")
